@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Verify Email{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1 style="margin-bottom: 2rem; font-size: 2rem; font-weight: 600;">Verify Your Email</h1>
+    <p style="margin-bottom: 2rem; color: var(--secondary-color);">
+        Please enter the OTP sent to your email address to verify your account.
+    </p>
+    
+    <form method="POST" action="{{ url_for('login.verify', username=username) }}">
+        <div class="form-group">
+            <label class="form-label" for="otp">OTP Code</label>
+            <input class="form-input" type="text" id="otp" name="otp" required 
+                   placeholder="Enter 6-digit OTP" pattern="[0-9]{6}" maxlength="6">
+        </div>
+        <button type="submit" class="btn btn-primary">Verify Email</button>
+    </form>
+    
+    <p style="margin-top: 1.5rem; font-size: 0.9rem;">
+        Didn't receive the OTP? <a href="{{ url_for('login.register') }}" 
+           style="color: var(--accent-color); text-decoration: none;">Register again</a>
+    </p>
+</div>
+{% endblock %}

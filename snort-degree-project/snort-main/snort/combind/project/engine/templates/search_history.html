@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Search History{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1 style="margin-bottom: 2rem; font-size: 2rem; font-weight: 600;">Search History</h1>
+    
+    {% if history %}
+        <div class="search-results">
+            {% for query, timestamp in history %}
+                <div class="search-card">
+                    <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">{{ query }}</h3>
+                    <p style="font-size: 0.9rem; color: var(--secondary-color);">{{ timestamp }}</p>
+                    <form method="POST" action="{{ url_for('search.search') }}" style="margin-top: 1rem;">
+                        <input type="hidden" name="query" value="{{ query }}">
+                        <button type="submit" class="btn btn-secondary">Search Again</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <form method="POST" action="{{ url_for('search.clear_history') }}" style="margin-top: 2rem;">
+            <button type="submit" class="btn btn-primary">Clear History</button>
+        </form>
+    {% else %}
+        <p style="font-size: 1.1rem; color: var(--secondary-color);">No search history found.</p>
+    {% endif %}
+</div>
+{% endblock %}

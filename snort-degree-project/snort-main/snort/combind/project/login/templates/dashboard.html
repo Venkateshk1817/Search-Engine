@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - Snort</title>
+    <link rel="stylesheet" href="{{ url_for('search.static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="login-box">
+        <h2>Welcome, {{ username }}</h2>
+        
+        <div class="links">
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

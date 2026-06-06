@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1 style="margin-bottom: 2rem; font-size: 2rem; font-weight: 600;">Search</h1>
+    <form method="POST" action="{{ url_for('search.search') }}">
+        <div class="form-group">
+            <input class="form-input" type="text" name="query" placeholder="Enter your search query..." required>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+{% if results %}
+    <div class="search-results">
+        {% if results.wikipedia %}
+            <div class="search-card">
+                <h2 style="margin-bottom: 1rem; font-size: 1.5rem; color: var(--text-color);">Wikipedia</h2>
+                <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem; color: var(--text-color);">{{ results.wikipedia.title }}</h3>
+                {% if results.wikipedia.image %}
+                    <img src="{{ results.wikipedia.image }}" alt="{{ results.wikipedia.title }}" style="max-width: 100%; height: auto; border-radius: 8px; margin: 1rem 0;">
+                {% endif %}
+                <p style="font-size: 0.9rem; color: var(--text-color); line-height: 1.6;">{{ results.wikipedia.summary }}</p>
+            </div>
+        {% endif %}
+
+        {% if results.omdb %}
+            <div class="search-card">
+                <h2 style="margin-bottom: 1rem; font-size: 1.5rem; color: var(--text-color);">Movie Information</h2>
+                <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem; color: var(--text-color);">{{ results.omdb.title }} ({{ results.omdb.year }})</h3>
+                {% if results.omdb.poster %}
+                    <img src="{{ results.omdb.poster }}" alt="{{ results.omdb.title }}" style="max-width: 100%; height: auto; border-radius: 8px; margin: 1rem 0;">
+                {% endif %}
+                <p style="font-size: 0.9rem; color: var(--text-color); line-height: 1.6;">{{ results.omdb.plot }}</p>
+            </div>
+        {% endif %}
+
+        {% if results.news %}
+            <div class="search-card">
+                <h2 style="margin-bottom: 1rem; font-size: 1.5rem; color: var(--text-color);">News</h2>
+                {% for article in results.news %}
+                    <div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--mono-border);">
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem;">
+                            <a href="{{ article.url }}" style="color: var(--accent-color); text-decoration: none; transition: color 0.2s;">{{ article.title }}</a>
+                        </h3>
+                        {% if article.image %}
+                            <img src="{{ article.image }}" alt="{{ article.title }}" style="max-width: 100%; height: auto; border-radius: 8px; margin: 1rem 0;">
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% elif request.method == "POST" %}
+    <div class="card" style="background-color: var(--mono-bg);">
+        <p style="color: var(--text-color); text-align: center; font-size: 1.1rem;">No results found for your search query. Please try a different search term.</p>
+    </div>
+{% endif %}
+{% endblock %}

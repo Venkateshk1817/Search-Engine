@@ -1,0 +1,45 @@
+🔎 Snort - A Full-Stack Search Engine
+
+Snort is a lightweight full-stack search engine built using Python Flask, SQLite, HTML, and CSS. It features a secure login and registration system and allows users to perform real-time searches using public APIs like **Wikipedia** and **IMDb**.
+
+
+
+REQURIEMENTS ARE:
+
+
+
+
+
+In this folder it containd two folders called login and engine
+
+login-- contains first login interface to register new user and login in of existing user
+
+
+->In these login folder all the HTML templates are stored and CSS file is stored in static file and main logic of the app is stored under name called app.py
+
+
+engine-- contains the search engine snort 
+
+
+->These engine folder follows same structure where all HTML files are stored in templates and CSS file is stored under static file and main logic of the engine is in app.py
+
+
+--------------------------
+
+1.Blue prints are been created for the both logics in login and engine to access them in the main.py where the main code is runned
+
+-------------------------
+
+FEATURES:
+
+
+- 🧑‍💻 User Registration & Login (with password hashing)
+- 🔐 Secure Session Management
+- 🌐 Search Integration using:
+  - Wikipedia API
+  - IMDb API (via RapidAPI or OMDB)
+- 🖥️ Simple and clean UI (customizable)
+- 🗃️ Local SQLite database for storing user credentials
+
+------------------------
+
